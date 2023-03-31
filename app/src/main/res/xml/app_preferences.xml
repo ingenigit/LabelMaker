@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+
+    <PreferenceCategory
+            android:title="Label Marker">
+
+        <EditTextPreference
+                android:key="prefLabelHeader"
+                android:title="Label Header"
+                android:summary="set the label header string [ max 15 chars]"
+                android:dialogTitle="Label Header" 
+                android:defaultValue=""
+                android:maxLength="15"
+                />
+        <EditTextPreference
+                android:key="prefLabelFooter"
+                android:title="Label Footer"
+                android:summary="set the label header string [max 30 chars]"
+                android:dialogTitle="Label Footer" 
+                android:defaultValue=""
+                android:maxLength="30"
+                />
+        
+        <EditTextPreference
+                android:key="prefFssaiLicNo"
+                android:title="FSSAI License No"
+                android:summary=""
+                android:dialogTitle="FSSAI License No" 
+                android:defaultValue=""
+                android:maxLength="20"
+                />
+        <EditTextPreference
+                android:key="prefMfgLoc"
+                android:title="Manufacturing Location"
+                android:summary=""
+                android:dialogTitle="Manufacturing Location" 
+                android:defaultValue=""
+                android:maxLength="20"
+                />
+
+    </PreferenceCategory>
+    
+   
+	
+
+	
+    
+</PreferenceScreen>

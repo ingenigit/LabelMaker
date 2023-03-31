@@ -1,0 +1,304 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" 
+    android:id="@+id/edititemmainrelativell"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="horizontal"
+    tools:context="com.pos.ingeni.posolutions.SalesImgvwActivity"
+    android:background="#ffffff">
+
+     <LinearLayout
+        android:id="@+id/edititemainll"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+       
+	
+	 	<LinearLayout
+        	android:id="@+id/edititemLLLeft"
+        	android:layout_height="match_parent"
+        	android:layout_width="match_parent"
+            android:layout_weight=".55"
+            android:orientation="vertical">
+
+			<SearchView
+        			android:id="@+id/salesitemsearch"
+        			android:layout_width="match_parent"
+        			android:layout_height="wrap_content" 
+        			android:iconifiedByDefault="false"
+    				
+        		/>
+			<ListView
+        				android:id="@+id/lvprodname"
+        				android:clickable="true"
+        				android:layout_height="wrap_content"
+        				android:layout_width="match_parent"
+        				>
+    				</ListView>
+		
+	</LinearLayout>
+	
+	 	
+	 	
+	 	
+	
+	<ScrollView
+    		android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:layout_weight=".45">		
+	<LinearLayout
+		    android:id="@+id/edititemLLRight"
+                android:layout_height="match_parent"
+	            android:layout_width="match_parent"
+	            android:layout_weight=".45"
+	            android:background="@drawable/textview_border"
+	            android:orientation="vertical" >
+	
+	   
+    
+         <LinearLayout android:id="@+id/llprname" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop = "5sp" android:layout_marginBottom = "5sp">
+        
+        	<TextView
+            android:id="@+id/tvprname" 
+            android:text="Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:gravity="left"
+            
+            />
+        
+        	<EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name [25 chars max]"
+            android:id="@+id/edname"
+            android:layout_weight=".3"
+            android:maxLength="25"
+            />
+        </LinearLayout>
+      
+        <LinearLayout android:id="@+id/lltypeinfo" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop = "5sp" android:layout_marginBottom = "5sp">
+        
+        	<TextView
+            android:id="@+id/tvedtype" 
+            android:text="Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:gravity="left"
+            
+            />
+        
+        	<EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Description [64 chars max]"
+            android:id="@+id/edinfo"
+            android:layout_weight=".3"
+            android:maxLength="128"
+            />
+        
+        </LinearLayout>
+         
+        
+        
+       
+        <LinearLayout android:id="@+id/ppriceinfo" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop = "5sp" android:layout_marginBottom = "5sp">
+        
+        <TextView
+            android:id="@+id/tvedprice" 
+            android:text="Price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:gravity="left"
+            android:layout_marginRight = "1sp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:inputType="numberDecimal"
+            android:layout_weight=".3"
+            android:maxLength="7"
+            android:id="@+id/edprice"
+            />
+        
+        </LinearLayout>
+        
+        <LinearLayout android:id="@+id/ptaxinfo" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop = "5sp" android:layout_marginBottom = "5sp">
+        
+         <TextView
+            android:id="@+id/tvtaxtype" 
+            android:text="Tax In Price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".85"
+            android:gravity="left"
+            android:layout_marginRight = "1sp"
+            />
+         
+        <RadioGroup
+        			android:id="@+id/seltaxtype"
+        			android:layout_width="fill_parent"
+        			android:layout_height="wrap_content" 
+        			android:orientation="horizontal"
+        			android:layout_gravity="center"
+        			android:layout_weight=".6"
+		            android:gravity="center">
+        
+        		<RadioButton
+        			android:id="@+id/seltaxincl"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:text="Inclusive"
+        			android:checked="true" 
+        			/>
+        
+        		<RadioButton
+        			android:id="@+id/seltaxexcl"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			android:text="Exclusive" 
+        			/>
+         </RadioGroup>
+        </LinearLayout>
+        
+        <LinearLayout android:id="@+id/pvalidity" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop = "5sp" android:layout_marginBottom = "5sp">
+        
+        <TextView
+            android:id="@+id/tvvalid" 
+            android:text="Validity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:gravity="left"
+            android:layout_marginRight = "1sp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_weight=".3"
+            android:inputType="number"
+            android:id="@+id/edvalid"
+            android:maxLength="4"
+            android:layout_marginTop = "5sp"
+        	android:layout_marginBottom = "5sp"/>
+         </LinearLayout>
+         
+        <LinearLayout android:id="@+id/pnetwt" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop = "5sp" android:layout_marginBottom = "5sp">
+        
+        <TextView
+            android:id="@+id/tvnetwt" 
+            android:text="Net Weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:gravity="left"
+            android:layout_marginRight = "1sp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:layout_weight=".3"
+            android:inputType="number"
+            android:id="@+id/ednetwt"
+            android:maxLength="5"
+            android:layout_marginTop = "5sp"
+        	android:layout_marginBottom = "5sp"/>
+         </LinearLayout>
+ 
+        <LinearLayout android:id="@+id/pbarinfo" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop = "5sp" android:layout_marginBottom = "5sp">
+        
+        <TextView
+            android:id="@+id/tvbarcode" 
+            android:text="Barcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:gravity="left"
+            android:layout_marginRight = "1sp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="BarCode"
+            android:layout_weight=".3"
+            android:inputType="number"
+            android:id="@+id/edbarcode"
+            android:maxLength="9"
+            android:layout_marginTop = "5sp"
+        	android:layout_marginBottom = "5sp"/>
+         </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            android:id="@+id/btclear" 
+            android:layout_marginTop = "5sp"
+        	android:layout_marginBottom = "5sp"/>
+        
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:id="@+id/btadd" 
+            android:layout_marginTop = "5sp"
+        	android:layout_marginBottom = "5sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:id="@+id/btupdate" 
+            android:layout_marginTop = "5sp"
+        	android:layout_marginBottom = "5sp"/>  
+                
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:id="@+id/btdelete" 
+            android:layout_marginTop = "5sp"
+        	android:layout_marginBottom = "5sp"/>  
+		        
+		
+        	
+        
+        </LinearLayout> 	
+	 	
+	 </ScrollView>
+	 	
+	 	
+	 	
+	 	
+
+	</LinearLayout>
+</RelativeLayout>
