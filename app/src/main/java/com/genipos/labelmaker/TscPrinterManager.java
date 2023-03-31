@@ -106,57 +106,56 @@ public class TscPrinterManager {
 		//String  header = "Suruchi Bakery";
 		//String  footer = "Customer Care: 9999999999";
 		
-//		int prinfolen = label.prodinfo.length();
-//		String proinfo1;
-//		String proinfo2;
-//		String proinfo3;
-//		if (prinfolen > 44)
-//		{
-//			proinfo1 = label.prodinfo.substring(0, 44);
-//
-//			if (prinfolen > 88)
-//			{
-//				proinfo2 = label.prodinfo.substring(44, 88);
-//				proinfo3 = label.prodinfo.substring(88, prinfolen);
-//			}
-//			else
-//			{
-//				proinfo2 = label.prodinfo.substring(44, prinfolen);
-//				proinfo3 = "";
-//			}
-//		}
-//		else
-//		{
-//			proinfo1 = label.prodinfo;
-//			proinfo2 = "";
-//			proinfo3 = "";
-//		}
+		int prinfolen = label.prodinfo.length();
+		String proinfo1;
+		String proinfo2;
+		String proinfo3;
+		if (prinfolen > 44)
+		{
+			proinfo1 = label.prodinfo.substring(0, 44);
+
+			if (prinfolen > 88)
+			{
+				proinfo2 = label.prodinfo.substring(44, 88);
+				proinfo3 = label.prodinfo.substring(88, prinfolen);
+			}
+			else
+			{
+				proinfo2 = label.prodinfo.substring(44, prinfolen);
+				proinfo3 = "";
+			}
+		}
+		else
+		{
+			proinfo1 = label.prodinfo;
+			proinfo2 = "";
+			proinfo3 = "";
+		}
 		
 		//Print product name
 
-		TscDll.printerfont(20, 15, "3", 0, 1, 1, label.title);
-		TscDll.printerfont(20, 45, "2", 0, 1, 1, label.prodname);
-		TscDll.printerfont(20, 65, "2", 0, 1, 1, label.price);
-		TscDll.barcode(20, 85, "128", 30, 1, 0,3,3, label.barcode);
-		TscDll.printerfont(20, 150, "2", 0, 1, 1, label.footer);
-//		TscDll.printerfont(20, 15, "4", 0, 1, 1, label.title);
-//		TscDll.printerfont(20, 55, "3", 0, 1, 1, label.prodname);
-//		TscDll.printerfont(20, 85, "1", 0, 1, 1, proinfo1);
-//		TscDll.printerfont(20, 100, "1", 0, 1, 1, proinfo2);
-//		TscDll.printerfont(20, 115, "1", 0, 1, 1, proinfo3);
-//		TscDll.printerfont(20, 130, "2", 0, 1, 1, "Mfg Dt:"+label.mfgdate);
-//		TscDll.printerfont(250, 130, "2", 0, 1, 1, "Use by:"+label.expdate);
-//		TscDll.printerfont(20, 150, "1", 0, 1, 1, "Net Wt.:"+label.netweight+label.wtunit);
-//		TscDll.printerfont(250, 150, "1", 0, 1, 1, "Batch No:"+label.batchno);
-//		TscDll.printerfont(20, 165, "2", 0, 1, 1, "Price:Rs"+label.price);
-//		TscDll.printerfont(250, 170, "1", 0, 1, 1,"[Include All Taxes]");
-		
-//    	TscDll.barcode(20, 185, "128", 30, 1, 0, 3, 3, label.barcode);
+//		TscDll.printerfont(20, 15, "3", 0, 1, 1, label.title);
+//		TscDll.printerfont(20, 45, "2", 0, 1, 1, label.prodname);
+//		TscDll.printerfont(20, 65, "2", 0, 1, 1, label.price);
+//		TscDll.barcode(20, 85, "128", 30, 1, 0,3,3, label.barcode);
+//		TscDll.printerfont(20, 150, "2", 0, 1, 1, label.footer);
+		TscDll.printerfont(20, 15, "4", 0, 1, 1, label.title);
+		TscDll.printerfont(20, 55, "3", 0, 1, 1, label.prodname);
+		TscDll.printerfont(20, 85, "1", 0, 1, 1, proinfo1);
+		TscDll.printerfont(20, 100, "1", 0, 1, 1, proinfo2);
+		TscDll.printerfont(20, 115, "1", 0, 1, 1, proinfo3);
+		TscDll.printerfont(20, 130, "2", 0, 1, 1, "Mfg Dt:"+label.mfgdate);
+		TscDll.printerfont(250, 130, "2", 0, 1, 1, "Use by:"+label.expdate);
+		TscDll.printerfont(20, 150, "1", 0, 1, 1, "Net Wt.:"+label.netweight+label.wtunit);
+		TscDll.printerfont(250, 150, "1", 0, 1, 1, "Batch No:"+label.batchno);
+		TscDll.printerfont(20, 165, "2", 0, 1, 1, "Price:Rs"+label.price);
+		TscDll.printerfont(250, 170, "1", 0, 1, 1,"[Include All Taxes]");
+    	TscDll.barcode(20, 185, "128", 30, 1, 0, 3, 3, label.barcode);
     	//TscDll.printerfont(340, 170, "2", 0, 1, 1, "Batch No");
     	//TscDll.printerfont(340, 200, "2", 0, 1, 1, label.batchno);
-//    	TscDll.printerfont(20, 250, "2", 0, 1, 1, "Mfg At:"+label.mfgsite);
-//    	TscDll.printerfont(20, 270, "2", 0, 1, 1, "Fssai Lic No: "+label.licno);
-//    	TscDll.printerfont(20, 295, "2", 0, 1, 1, label.footer);
+    	TscDll.printerfont(20, 250, "2", 0, 1, 1, "Mfg At:"+label.mfgsite);
+    	TscDll.printerfont(20, 270, "2", 0, 1, 1, "Fssai Lic No: "+label.licno);
+    	TscDll.printerfont(20, 295, "2", 0, 1, 1, label.footer);
     	//TscDll.printerfont(50, 250, "3", 0, 1, 1, "123456789");
     	///Log.i("BT", "sendcommand4:"+res);
     	//TscDll.printerfont(0, 0, "3", 0, 1, 1, "987654321"); 
