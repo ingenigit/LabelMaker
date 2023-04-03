@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         add("Connect Printer");
         add("Settings");
         add("Import Product Database");
+        add("History");
         //add("Configure Printer");
     }};//new ArrayList <String>{"Connect Printer", "Print Label", "Configure Printer"};
     private ArrayAdapter<String> listAdapter ;
@@ -72,15 +73,17 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (position == 3)
                 {
-                    Intent connactivity = new Intent(MainActivity.this, AppPreferenceActivity.class);
-                    startActivity(connactivity);
+//                    Intent connactivity = new Intent(MainActivity.this, AppPreferenceActivity.class);
+//                    startActivity(connactivity);
 
                 }
                 else if (position == 4)
                 {
-
-
-
+                }
+                else if (position == 5)
+                {
+                    Intent connactivity = new Intent(MainActivity.this, HistoryActivity.class);
+                    startActivity(connactivity);
                 }
 
 

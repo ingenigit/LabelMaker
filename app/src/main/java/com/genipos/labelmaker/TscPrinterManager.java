@@ -24,7 +24,8 @@ public class TscPrinterManager {
 		boolean connres = connectPrinter(addr);
 		
 		if (connres == true)
-		{	initPrinter();
+		{
+			initPrinter();
 		
 			devconnstatus = 2;
 		
@@ -58,7 +59,6 @@ public class TscPrinterManager {
 	public void initPrinter()
 	{
 		String res;
-		
 		res = TscDll.setup(60, 40, 4, 4, 0, 2, 0);
     	Log.i("BT", "Setup:"+res);
     	res = TscDll.clearbuffer(); 

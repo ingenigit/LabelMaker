@@ -4,22 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.genipos.labelmaker.roomdb.ProRepository;
+import com.genipos.labelmaker.roomdb.ProViewModel;
+import com.genipos.labelmaker.roomdb.Product;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PrintLabelActivity extends AppCompatActivity {
@@ -35,6 +32,10 @@ public class PrintLabelActivity extends AppCompatActivity {
     //ProductInfo newprodinfo=null;
 //    ArrayList<String> itemList;
 //    private ArrayAdapter<String> listAdapter ;
+    ProViewModel proViewModel;
+    ProRepository proRepository;
+    Product test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,17 +43,132 @@ public class PrintLabelActivity extends AppCompatActivity {
 
         mContext = this;
         gAppEnv = (AppEnv) getApplicationContext();
+        proViewModel = new ProViewModel(getApplication());
+        proRepository = new ProRepository(getApplication());
 //        prodlistview = (ListView)findViewById(R.id.lvprodlist);
 //        itemList = new ArrayList<>();//gAppEnv.getProductManager().getProductNames();
 //        listAdapter = new ArrayAdapter<String>(this, R.layout.menu_list_row, itemList);
 //        prodlistview.setAdapter(listAdapter);
-//        prodlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        prodlistview.setOnIte0mClickListener(new AdapterView.OnItemClickListener() {
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                String prodname = itemList.get(position);
 //                edname.setText(prodname);
 //            }
 //        });
+        init();
+        Intent intent = getIntent();
+        int valeu = intent.getIntExtra("selected_ID", -1);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                test = proRepository.getSingleData(valeu);
+            }
+        });
+        if(valeu > -1) {
+            try {
+                thread.start();
+                thread.join();
+                setTextValue(test);
+                System.out.println("Pass Id: " + test.cName);
 
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //textChangeListener
+        onTextChange();
+
+        /*
+        edmfgdate.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(mContext, mfgdatecallback, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        edexpdate.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(mContext, expdatecallback, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });*/
+
+
+        btprint = (Button)findViewById(R.id.btprint);
+        btprint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                if (!gAppEnv.getTscPrinterManager().isPrinterInitialized())
+                {
+                    Toast.makeText(getApplicationContext(), "Printer is Offline", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if( (editTextPName.getText().toString().isEmpty()) || (editTextLabelCnt.getText().toString().isEmpty()) )
+                {
+                    //Show error message/alert
+                    Toast.makeText(getApplicationContext(), "Enter required fields", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Product product = new Product(
+                        0,
+                        editTextCName.getText().toString(),
+                        editTextPName.getText().toString(),
+                        editTextPDesc.getText().toString(),
+                        editTextMfgDate.getText().toString(),
+                        editTextExpDate.getText().toString(),
+                        editTextNetWt.getText().toString(),
+                        editTextUnit.getText().toString(),
+                        editTextPrice.getText().toString(),
+                        editTextBatchNo.getText().toString(),
+                        editTextMfgAt.getText().toString(),
+                        editTextLicNo.getText().toString()
+                );
+//                proViewModel.insertProduct(product);
+                proRepository.insertProduct(product);
+
+
+                LabelInfo labelinfo = new LabelInfo();
+                labelinfo.title = editTextCName.getText().toString();
+                labelinfo.prodname = editTextPName.getText().toString();
+                labelinfo.prodinfo = editTextPDesc.getText().toString();
+                labelinfo.mfgdate = editTextMfgDate.getText().toString();
+                labelinfo.expdate = editTextExpDate.getText().toString();
+                labelinfo.netweight = editTextNetWt.getText().toString();
+                labelinfo.wtunit = editTextUnit.getText().toString();
+                labelinfo.batchno = editTextBatchNo.getText().toString();
+                labelinfo.price = editTextPrice.getText().toString();
+                labelinfo.mfgsite = editTextMfgAt.getText().toString();
+                labelinfo.licno = editTextLicNo.getText().toString();
+                String scnt = editTextLabelCnt.getText().toString();
+                Integer lpcnt = Integer.parseInt(scnt);
+                labelinfo.count = lpcnt;
+
+                //ProductInfo prodinfo = gAppEnv.getProductManager().getProductInfo(labelinfo.prodname);
+//                labelinfo.prodinfo = "jjkjk jlkjlkjkl nklklkl";//prodinfo.info;
+                labelinfo.barcode = "1234568952";//prodinfo.barcode;
+//                labelinfo.price = "50";//prodinfo.price;
+                labelinfo.validity = "xxxx";//prodinfo.validity.toString()+ "Days";
+//                labelinfo.netweight = "fggtt";//prodinfo.netweight;
+//                labelinfo.wtunit = "ffhttt";//prodinfo.wtunit;
+//                labelinfo.title = "Weavy";//gAppEnv.getLabelHeader();
+                labelinfo.footer = "Thank You";//gAppEnv.getLabelFooter();
+//                labelinfo.mfgsite = "Bhubaneswar";gAppEnv.getMfgSite();
+//                labelinfo.licno = "xxxxxx";//gAppEnv.getLicNo();
+
+                gAppEnv.getTscPrinterManager().PrintLabel(labelinfo);
+            }
+        });
+    }
+    private void init() {
         editTextCName = (TextInputEditText)findViewById(R.id.edtcompanyname);
         editTextPName = (TextInputEditText)findViewById(R.id.edtproductname);
         editTextPDesc = (TextInputEditText)findViewById(R.id.edtproductdesc);
@@ -75,7 +191,8 @@ public class PrintLabelActivity extends AppCompatActivity {
         textViewPrice = (TextView) findViewById(R.id.print_price_value);
         textViewMfgAt = (TextView) findViewById(R.id.print_mfg_at_value);
         textViewLicNo = (TextView) findViewById(R.id.print_fssai_lic_no_value);
-        //textChangeListener
+    }
+    private void onTextChange() {
         editTextCName.addTextChangedListener(new DataTextWatcher(this,editTextCName,editTextCName, textViewCName));
         editTextPName.addTextChangedListener(new DataTextWatcher(this,editTextPName,editTextPName, textViewPName));
         editTextPDesc.addTextChangedListener(new DataTextWatcher(this,editTextPDesc,editTextPDesc, textViewPDesc));
@@ -122,75 +239,28 @@ public class PrintLabelActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
-        /*
-        edmfgdate.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(mContext, mfgdatecallback, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        edexpdate.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(mContext, expdatecallback, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });*/
-
-
-        btprint = (Button)findViewById(R.id.btprint);
-        btprint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                if (!gAppEnv.getTscPrinterManager().isPrinterInitialized())
-                {
-                    Toast.makeText(getApplicationContext(), "Printer is Offline", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if( (editTextPName.getText().toString().isEmpty()) || (editTextLabelCnt.getText().toString().isEmpty()) )
-                {
-                    //Show error message/alert
-                    Toast.makeText(getApplicationContext(), "Enter required fields", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                LabelInfo labelinfo = new LabelInfo();
-                labelinfo.title = editTextCName.getText().toString();
-                labelinfo.prodname = editTextPName.getText().toString();
-                labelinfo.prodinfo = editTextPDesc.getText().toString();
-                labelinfo.mfgdate = editTextMfgDate.getText().toString();
-                labelinfo.expdate = editTextExpDate.getText().toString();
-                labelinfo.netweight = editTextNetWt.getText().toString();
-                labelinfo.batchno = editTextBatchNo.getText().toString();
-                labelinfo.price = editTextPrice.getText().toString();
-                labelinfo.mfgsite = editTextMfgAt.getText().toString();
-                labelinfo.licno = editTextLicNo.getText().toString();
-                String scnt = editTextLabelCnt.getText().toString();
-                Integer lpcnt = Integer.parseInt(scnt);
-                labelinfo.count = lpcnt;
-
-                //ProductInfo prodinfo = gAppEnv.getProductManager().getProductInfo(labelinfo.prodname);
-//                labelinfo.prodinfo = "jjkjk jlkjlkjkl nklklkl";//prodinfo.info;
-                labelinfo.barcode = "1234568952";//prodinfo.barcode;
-//                labelinfo.price = "50";//prodinfo.price;
-                labelinfo.validity = "xxxx";//prodinfo.validity.toString()+ "Days";
-//                labelinfo.netweight = "fggtt";//prodinfo.netweight;
-//                labelinfo.wtunit = "ffhttt";//prodinfo.wtunit;
-//                labelinfo.title = "Weavy";//gAppEnv.getLabelHeader();
-                labelinfo.footer = "Thank You";//gAppEnv.getLabelFooter();
-//                labelinfo.mfgsite = "Bhubaneswar";gAppEnv.getMfgSite();
-//                labelinfo.licno = "xxxxxx";//gAppEnv.getLicNo();
-
-                gAppEnv.getTscPrinterManager().PrintLabel(labelinfo);
-            }
-        });
+    }
+    private void setTextValue(Product test) {
+        editTextCName.setText(test.getcName());
+        editTextPName.setText(test.getpName());
+        editTextPDesc.setText(test.getpDesc());
+        editTextMfgDate.setText(test.getpMfg());
+        editTextExpDate.setText(test.getpExp());
+        editTextNetWt.setText(test.getpWeight());
+        editTextUnit.setText(test.getpUnit());
+        editTextBatchNo.setText(test.getpBatch());
+        editTextPrice.setText(test.getpPrice());
+        editTextMfgAt.setText(test.getpMfgAt());
+        editTextLicNo.setText(test.getpLic());
+        textViewCName.setText(test.getcName());
+        textViewPName.setText(test.getpName());
+        textViewPDesc.setText(test.getpDesc());
+        textViewMfgDate.setText(test.getpMfg());
+        textViewExpDate.setText(test.getpExp());
+        textViewNetWt.setText(test.getpWeight());
+        textViewBatchNo.setText(test.getpBatch());
+        textViewPrice.setText(test.getpPrice());
+        textViewMfgAt.setText(test.getpMfgAt());
+        textViewLicNo.setText(test.getpLic());
     }
 }
