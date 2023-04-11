@@ -73,12 +73,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (position == 3)
                 {
+                    Intent connactivity = new Intent(MainActivity.this, SettingActivity.class);
+                    startActivity(connactivity);
 //                    Intent connactivity = new Intent(MainActivity.this, AppPreferenceActivity.class);
 //                    startActivity(connactivity);
 
                 }
                 else if (position == 4)
                 {
+                    startActivity(new Intent(MainActivity.this, DummyTestActivity.class));
                 }
                 else if (position == 5)
                 {

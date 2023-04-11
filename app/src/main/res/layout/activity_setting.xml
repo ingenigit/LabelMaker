@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/cardView_"
+        android:layout_marginBottom="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--        <EditText-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:hint="Name"-->
+                <!--            android:layout_weight="1"-->
+                <!--            android:id="@+id/editTextName_"/>-->
+                <!--        <EditText-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:hint="Barcode no."-->
+                <!--            android:layout_weight="1"-->
+                <!--            android:id="@+id/editText_"/>-->
+                <!--        <EditText-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:hint="X-axis"-->
+                <!--            android:layout_weight="0.3"-->
+                <!--            android:id="@+id/editTextX_"/>-->
+                <!--        <EditText-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:hint="Y-axis"-->
+                <!--            android:layout_weight="0.3"-->
+                <!--            android:id="@+id/editTextY_"/>-->
+                <!--        <EditText-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:hint="Size"-->
+                <!--            android:layout_weight="0.3"-->
+                <!--            android:id="@+id/editTextSize_"/>-->
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/buttonHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/linearLayout"
+                android:gravity="end">
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/button_add_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Bar"
+                    android:layout_marginEnd="10dp"/>
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/button_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:layout_marginEnd="10dp"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/save_data"
+                android:visibility="gone"
+                android:layout_below="@+id/buttonHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="SAve"
+                android:layout_marginEnd="10dp"/>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

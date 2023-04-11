@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="textAutoComplete"
+        android:layout_weight="1"
+        android:id="@+id/editTextName_"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Barcode no."
+        android:inputType="textAutoComplete"
+        android:layout_weight="1"
+        android:id="@+id/editText_"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="X-axis"
+        android:inputType="number"
+        android:layout_weight="0.3"
+        android:id="@+id/editTextX_"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Y-axis"
+        android:inputType="number"
+        android:layout_weight="0.3"
+        android:id="@+id/editTextY_"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Size"
+        android:inputType="number"
+        android:layout_weight="0.3"
+        android:id="@+id/editTextSize_"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_round_clear_24"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/imageView_"/>
+</LinearLayout>
